@@ -104,47 +104,45 @@
     /* slider */
     #slider {
       overflow: hidden;
-      height: calc(100vh - 120px); /*footer 값 빼기*/
+      height: calc(100vh - 120px);
     }
 
     .sliderWrap {
       width: 100%;
-      height: 400vh;
-      display: block;
+      height: 300vh;
     }
 
-    .sliderWrap>.slider {
+    .sliderWrap .slider {
       position: relative;
       width: 100%;
       height: 100vh;
     }
 
-    .sliderWrap>.slider img {
-      display: block;
-    }
-
     .sliderWrap>.slider>span {
       position: absolute;
       left: 50%;
-      top: calc(50% - 60px); /* #slider 에서 120px 잘랐기때문에 그거의 반을 자름*/
+      top: calc(50% - 60px);
       transform: translate(-50%, -50%);
       background-color: rgba(0, 0, 0, 0.4);
-      color: #fff;
-      padding: 10px 20px;
+      padding: 10px;
+    }
+
+    .sliderWrap>.slider>img {
+      display: block;
     }
 
     .sliderWrap>.slider.s1 {
-      background: url('img/slider04.jpg') no-repeat center;
+      background: url('../img/slider04.jpg') no-repeat center;
       background-size: cover;
     }
 
     .sliderWrap>.slider.s2 {
-      background: url('img/slider05.jpg') no-repeat center;
+      background: url('../img/slider05.jpg') no-repeat center;
       background-size: cover;
     }
 
     .sliderWrap>.slider.s3 {
-      background: url('img/slider06.jpg') no-repeat center;
+      background: url('../img/slider06.jpg') no-repeat center;
       background-size: cover;
     }
   </style>
@@ -195,36 +193,35 @@
   <!-- //wrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script>
-    /* 
-    1. 현재이미지 설정
-    - 첫번째 이미지 복사하여 추가
-    - 반복작업 setInterval marginTop
-    - ==3일때 마지막한번 초기화작업
-    */
     $(function () {
+      /* 
+      내가 해야할 3가지
+      -현재 인덱스값 설정
+      - 첫번째 이미지 복사 후 붙여넣기
+      - setInterval로 반복 작업 marginTop
+      - if setTimeout으로 마지막 한번만 실행
+      */
 
       let currenIdx = 0
-      let fstchd = $('.slider').eq(0).clone(true)
-      $('.sliderWrap').append(fstchd)
+      let frstChd = $('.slider').eq(0).clone(true)
+      $('.sliderWrap').append(frstChd)
 
       setInterval(function () {
-        currenIdx++;
+        currenIdx++
         $('.sliderWrap').animate({ marginTop: -currenIdx * 100 + 'vh' }, 700)
 
-
-
-        setTimeout(function () {
-          if (currenIdx == 3) {
+        if (currenIdx == 3) {
+          setTimeout(function () {
             $('.sliderWrap').animate({ marginTop: 0 }, 0)
             currenIdx = 0
-          }
-        }, 700)
+
+          }, 0)
+
+        }
+
       }, 3000)
 
-
     })
-
-
 
 
 
